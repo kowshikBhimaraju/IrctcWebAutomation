@@ -38,10 +38,8 @@ public class PnrStatus extends PnrStatusXpaths {
 	}
 
 	public void pnrStatusWindow(String data) throws IOException {
-
 		switch (data) {
 		case "PNR Enquiry":
-
 			entryNo.sendKeys("4910745499");
 			submitButtonPnrEnquiry.click();
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -52,20 +50,23 @@ public class PnrStatus extends PnrStatusXpaths {
 				String imageOcr = image.doOCR(new File(pathforScreenShot));
 				System.out.println("----------------Image ORC Conversion Done-----------------");
 				System.out.println("captcha VALUE" + imageOcr);
-
 			} catch (Exception e) {
 				System.out.println("Image OCR failed " + e.getMessage());
 			}
-
+			break;
 		case "Reserved Train Between Stations":
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			rtbsLink.click();
 //			calendarIcon.click();
 			sourceDestinationList=new ArrayList<WebElement>();
 			sourceStation.sendKeys("HYD");
+			break;
 		case "Seat Availability":
+			break;
 		case "Fare Enquiry":
+			break;
 		case "Reserved Train Schedule":
+			break;
 		}
 
 	}

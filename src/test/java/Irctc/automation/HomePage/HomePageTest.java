@@ -1,47 +1,74 @@
 package Irctc.automation.HomePage;
 
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 
-import Irctc.automation.CommonMethods.CommonMethods;
-
-public class HomePageTest extends CommonMethods {
-   
-	private static WebDriver driver;
-    HomePage HomePage;
+public class HomePageTest  {
+  
+	public String path = "C:\\Users\\bhavy\\eclipse-workspace\\Work\\Irctc.web\\DataProvider.properties";
+	public static WebDriver driver;
+    HomePage homePage;
     
     public HomePageTest() {
-    	super(driver);
+    	homePage=new HomePage(driver);
     }
+    
+	public void browserSelection() throws IOException {
+		Properties prop = new Properties();
+		FileReader fileReader = new FileReader(path);
+		prop.load(fileReader);
+		String browser = prop.getProperty("browser");
+		String url = prop.getProperty("URL");
+		if (browser.equals("chrome")) {
+			driver = new ChromeDriver();
+			driver.get(url);
+			driver.manage().window().maximize();
+		} else if (browser.equals("Edge")) {
+			driver = new EdgeDriver();
+			driver.get(url);
+			driver.manage().window().maximize();
+		}else if (browser.equals("FirefoxDriver")) {
+			driver = new FirefoxDriver();
+			driver.get(url);
+			driver.manage().window().maximize();
+		}else {
+			System.out.println("No WebDriver Found, Hence ending the TestRun!!!!!");
+		}
+	}
  
     @Test
-    public synchronized void navigateToIrctcHomePage() throws IOException {
+    public void navigateToIrctcHomePage() throws IOException {
         browserSelection();
-        HomePage = new HomePage(driver);
-        HomePage.menuButton();
+        homePage.loginFeatureHomePage();
 //        driver.quit();
     }
 
     @Test
-    public synchronized void navigateToPnrStatus() throws IOException, InterruptedException {
+    public  void navigateToPnrStatus() throws IOException, InterruptedException {
         browserSelection();
-        HomePage.pnrStatusButton("PNR Enquiry");
+    	homePage=new HomePage(driver);
+        homePage.pnrStatusButton("PNR Enquiry");
 //        driver.quit();
     }
 
     @Test
     public void navigateToChartsAndVacancy() throws IOException {
         browserSelection();
-        HomePage.chartsAndVacancyButton();
+        homePage.chartsAndVacancyButton();
 //        driver.quit();
     }
 
     @Test
     public void navigateToFlightsPage() throws IOException {
         browserSelection();
-        HomePage.flightsHyperLink();
+        homePage.flightsHyperLink();
     }
 
 }
