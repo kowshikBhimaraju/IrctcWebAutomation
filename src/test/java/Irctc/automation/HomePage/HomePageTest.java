@@ -11,6 +11,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 
+import net.sourceforge.tess4j.TesseractException;
+
 public class HomePageTest {
 
 	public String path = "C:\\Users\\bhavy\\eclipse-workspace\\Work\\Irctc.web\\DataProvider.properties";
@@ -48,6 +50,13 @@ public class HomePageTest {
 		browserSelection();
 		homePage = new HomePage(driver);
 		homePage.loginFeatureHomePage();
+	}
+
+	@Test
+	public void registerButtonHomePage() throws IOException, InterruptedException, TesseractException {
+		browserSelection();
+		homePage = new HomePage(driver);
+		homePage.registerButtonHomePage();
 	}
 
 	@Test

@@ -5,7 +5,7 @@
     <classes>
       <class name="Irctc.automation.HomePage.HomePageTest">
         <methods>
-          <include name="loginButtonHomePage"/>
+          <include name="registerButtonHomePage"/>
         </methods>
       </class> <!-- Irctc.automation.HomePage.HomePageTest -->
     </classes>

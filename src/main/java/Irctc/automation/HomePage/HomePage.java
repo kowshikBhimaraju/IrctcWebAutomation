@@ -1,5 +1,7 @@
 package Irctc.automation.HomePage;
 
+import static org.testng.Assert.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -14,6 +16,7 @@ import Irctc.automation.CommonUtilities.CommonUtils;
 import Irctc.automation.Pnrstatus.PnrStatus;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,7 +25,8 @@ import org.openqa.selenium.io.FileHandler;
 public class HomePage extends CommonMethods {
 	String pathforScreenShot = "C:\\Users\\bhavy\\eclipse-workspace\\Work\\Irctc.web\\captchaImages\\captcha.png";
 	WebDriver driver;
-	WebElement captchaHomePage, homePagePnrStatusButton, homePageChartsAndVacancyButton, homePageFlightsHyperLink;
+	WebElement captchaHomePage, captchaRegisterButton, homePagePnrStatusButton, homePageChartsAndVacancyButton,
+			homePageFlightsHyperLink;
 	CommonUtils commonUtils;
 	PnrStatus pnrStatus;
 	String parentWindowHandleString;
@@ -57,10 +61,36 @@ public class HomePage extends CommonMethods {
 			System.out.println("captcha VALUE" + imageOcr);
 			driver.findElement(By.id(homePageXpaths.loginCaptchaTextId)).sendKeys(imageOcr);
 			driver.findElement(By.xpath(homePageXpaths.loginSignInButtonXpath)).click();
-			driver.findElement(By.xpath(homePageXpaths.loginLogoutButtonXpath)).click();;
+			waitFor(2);
+			driver.findElement(By.xpath(homePageXpaths.loginLogoutButtonXpath)).click();
 		} catch (Exception e) {
 			System.out.println("Image OCR failed " + e.getMessage());
 		}
+	}
+
+	public void registerButtonHomePage() throws IOException, TesseractException {
+		driver.findElement(By.cssSelector(homePageXpaths.registerButtonHomePageCssSelector)).click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		waitFor(2);
+		driver.findElement(By.cssSelector(homePageXpaths.userNameRegisterCssSelector)).sendKeys("testingSelenium");
+		driver.findElement(By.cssSelector(homePageXpaths.fullNameRegisterCssSelector)).sendKeys("SeleniumTester");
+		driver.findElement(By.cssSelector(homePageXpaths.passwordRegisterCssSelector)).sendKeys("Selenium@123");
+		driver.findElement(By.cssSelector(homePageXpaths.confirmPasswordRegisterCssSelector)).sendKeys("Selenium@123");
+		driver.findElement(By.cssSelector(homePageXpaths.emailRegisterCssSelector)).sendKeys("selenium123@gmail.com");
+		driver.findElement(By.cssSelector(homePageXpaths.mobileNumberRegisterCssSelector)).sendKeys(randomTenDigit());
+		captchaRegisterButton = driver.findElement(By.xpath(homePageXpaths.captchaRegisterButtonXpath));
+		File source = captchaRegisterButton.getScreenshotAs(OutputType.FILE);
+		FileHandler.copy(source, new File(pathforScreenShot));
+		ITesseract image = new Tesseract();
+		String imageOcr = image.doOCR(new File(pathforScreenShot));
+		System.out.println("----------------Image ORC Conversion Done-----------------");
+		System.out.println("captcha VALUE" + imageOcr);
+		driver.findElement(By.cssSelector(homePageXpaths.captchaRegisterTextCssSelector)).sendKeys(imageOcr);
+		driver.findElement(By.xpath(homePageXpaths.okButtonPopUpRegisterXpath)).click();
+		WebElement otpValidationValue = driver.findElement(By.xpath(homePageXpaths.otpAssertionStringValueXpath));
+		String otpAssertion = otpValidationValue.getText();
+		assertEquals(otpAssertion, "Please enter OTP received on provided Mobile number and Email ID");
+
 	}
 
 	public void pnrStatusButton(String data) throws IOException {

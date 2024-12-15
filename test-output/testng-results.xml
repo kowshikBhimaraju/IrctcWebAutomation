@@ -2,15 +2,15 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-12-14T16:32:12 IST" name="Default suite" finished-at="2024-12-14T16:32:25 IST" duration-ms="12124">
+  <suite started-at="2024-12-15T13:22:50 IST" name="Default suite" finished-at="2024-12-15T13:23:04 IST" duration-ms="14822">
     <groups>
     </groups>
-    <test started-at="2024-12-14T16:32:12 IST" name="Default test" finished-at="2024-12-14T16:32:25 IST" duration-ms="12124">
+    <test started-at="2024-12-15T13:22:50 IST" name="Default test" finished-at="2024-12-15T13:23:04 IST" duration-ms="14822">
       <class name="Irctc.automation.HomePage.HomePageTest">
-        <test-method signature="loginButtonHomePage()[pri:0, instance:Irctc.automation.HomePage.HomePageTest@76505305]" started-at="2024-12-14T16:32:12 IST" name="loginButtonHomePage" finished-at="2024-12-14T16:32:25 IST" duration-ms="12084" status="PASS">
+        <test-method signature="registerButtonHomePage()[pri:0, instance:Irctc.automation.HomePage.HomePageTest@7b98f307]" started-at="2024-12-15T13:22:50 IST" name="registerButtonHomePage" finished-at="2024-12-15T13:23:04 IST" duration-ms="14779" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginButtonHomePage -->
+        </test-method> <!-- registerButtonHomePage -->
       </class> <!-- Irctc.automation.HomePage.HomePageTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
