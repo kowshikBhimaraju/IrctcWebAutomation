@@ -1,4 +1,4 @@
-package Irctc.automation.HomePage;
+package Irctc.automation;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -24,9 +24,9 @@ public class LoginRegisterMethods {
     final String errorMessageInvalidCredentials = "Incorrect User Name / Password. You are left with 4 more attempts.";
     String pathforScreenShot = "C:\\Users\\2159800\\Uiscreenshots\\captcha.png";
     WebDriver driver;
-    WebElement captchaHomePage, captchaRegisterButton, homePagePnrStatusButton, homePageChartsAndVacancyButton, homePageFlightsHyperLink;
+    WebElement captchaHomePage, captchaRegisterButton, homePageChartsAndVacancyButton, homePageFlightsHyperLink;
     PnrStatus pnrStatus;
-    String parentWindowHandleString, errorMessageForInvalidCredentials;
+    String errorMessageForInvalidCredentials;
     LoginRegisterXpaths loginRegisterXpaths;
 
 
@@ -102,20 +102,6 @@ public class LoginRegisterMethods {
 
     }
 
-    public void pnrStatusButton(String data) throws IOException {
-        homePagePnrStatusButton = driver.findElement(By.xpath(loginRegisterXpaths.PnrStatusButton));
-        homePagePnrStatusButton.click();
-        parentWindowHandleString = driver.getWindowHandle();
-        System.out.println(parentWindowHandleString);
-        for (String windowHandle : driver.getWindowHandles()) {
-            if (!parentWindowHandleString.contentEquals(windowHandle)) {
-                driver.switchTo().window(windowHandle);
-                break;
-            }
-        }
-        pnrStatus = new PnrStatus(driver);
-        pnrStatus.pnrStatusWindow(data);
-    }
 
     public void chartsAndVacancyButton() {
         homePageChartsAndVacancyButton = driver.findElement(By.xpath(loginRegisterXpaths.ChartsAndVacancyButton));

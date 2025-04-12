@@ -1,4 +1,4 @@
-package Irctc.automation.HomePage;
+package Irctc.automation;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class LoginAndRegisterTest extends DriverInitialization {
 
-    LoginRegisterMethods homePageMethods;
+    LoginRegisterMethods loginRegisterMethods;
 
     public LoginAndRegisterTest() {
     }
@@ -18,7 +18,7 @@ public class LoginAndRegisterTest extends DriverInitialization {
     @BeforeTest
     public void setUp() throws IOException {
         browserSelection();
-        homePageMethods = new LoginRegisterMethods(driver);
+        loginRegisterMethods = new LoginRegisterMethods(driver);
     }
 
     @AfterTest
@@ -28,12 +28,12 @@ public class LoginAndRegisterTest extends DriverInitialization {
 
     @Test
     public void loginButtonHomePage() {
-        homePageMethods.loginFeatureHomePage();
+        loginRegisterMethods.loginFeatureHomePage();
     }
 
     @Test
     public void registerButtonLoginPage() throws TesseractException, IOException {
-        homePageMethods.registerButtonHomePage();
+        loginRegisterMethods.registerButtonHomePage();
     }
 
 

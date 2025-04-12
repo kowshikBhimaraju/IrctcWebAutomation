@@ -1,4 +1,4 @@
-package Irctc.automation.HomePage;
+package Irctc.automation;
 
 public class LoginRegisterXpaths {
     public String loginButtonXpath = "//a[text()=' LOGIN ']";//For larger resolution screens
@@ -21,7 +21,6 @@ public class LoginRegisterXpaths {
     public String okButtonPopUpRegisterXpath = "//button[text()=' OK']";
     public String otpAssertionStringValueXpath = "//div[text()='Please enter OTP received on provided Mobile number and Email ID']";
     public String MenuButton = "//div[@class='h_menu_drop_button hidden-xs']";
-    public String PnrStatusButton = "//div[@class='hidden-xs']/div[@class='text-center pull-left']/a/label[@class='search_btn']";
     public String ChartsAndVacancyButton = "//*[@id=\"divMain\"]/div/app-main-page/div/div/div[1]/div[1]/div[1]/div[1]/div[2]/a/label";
     public String bookTicketText = "//label[text()=' BOOK TICKET ']";
     public String flightsHyperLink = "//a[@aria-label='Flight opens a new window']";
