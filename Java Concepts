@@ -1,0 +1,42 @@
+---------JAVA CONCEPTS-----
+The "Properties" class in Java is a powerful utility used for managing configuration data in the form of key-value pairs. Here’s an overview of its purpose, features, and common use cases.
+Purpose of the Properties Class
+1.Configuration Management: The Properties class is primarily used to manage configuration settings for applications. It allows developers to store configuration data externally in properties files, making it easier to modify settings without recompiling the code.
+2. Key-Value Pair Storage: It stores data in the form of strings, where both keys and values are strings. This makes it suitable for simple configurations like database connection settings, user preferences, and application parameters.
+3. Persistence: The properties can be saved to a file or loaded from a file, enabling persistent storage of configuration data across application runs.
+
+Features of the Properties Class
+1. Subclass of Hashtable: The Properties class extends Hashtable, which means it inherits methods for storing and retrieving key-value pairs but is specifically designed for string keys and values15.
+2. Default Properties: It can support default properties, allowing a Properties instance to fall back on another set of properties if a requested key is not found in the primary set23.
+3. Thread-Safety: The Properties object does not require external synchronization, making it safe for use by multiple threads2.
+4. System Properties Access: It can be used to access system properties via System.getProperties(), which provides information about the runtime environment
+
+Common Use Cases
+Reading Configuration Files: Developers often use properties files (.properties) to store configuration data. For example, a database connection string can be stored in a properties file and read at runtime:
+java
+Properties props = new Properties();
+try (FileReader reader = new FileReader("config.properties")) {
+    props.load(reader);
+    String dbUrl = props.getProperty("db.url");
+}
+
+Writing Configuration Files: You can also write properties back to a file after modifying them:
+java
+try (FileOutputStream out = new FileOutputStream("config.properties")) {
+    props.setProperty("db.url", "jdbc:mysql://localhost:3306/mydb");
+    props.store(out, "Database Configuration");
+}
+
+Accessing System Properties: You can retrieve system-level properties such as Java version or user home directory:
+java
+Properties systemProps = System.getProperties();
+String javaVersion = systemProps.getProperty("java.version");
+
+Default Property Values: When creating a Properties object, you can provide another Properties instance as default values:
+java
+Properties defaults = new Properties();
+defaults.setProperty("timeout", "30");
+Properties customProps = new Properties(defaults);
+
+Conclusion
+The Properties class is an essential part of Java's standard library for managing application configurations effectively. Its ability to read from and write to external files makes it a flexible choice for developers looking to separate configuration from code logic, thereby enhancing maintainability and adaptability of applications
