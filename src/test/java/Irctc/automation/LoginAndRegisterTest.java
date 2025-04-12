@@ -3,6 +3,7 @@ package Irctc.automation;
 import java.io.IOException;
 
 import Irctc.automation.Driver.DriverInitialization;
+import Irctc.automation.LoginRegister.LoginRegisterMethods;
 import net.sourceforge.tess4j.TesseractException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;

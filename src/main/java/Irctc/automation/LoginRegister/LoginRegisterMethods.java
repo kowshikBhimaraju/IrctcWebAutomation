@@ -1,4 +1,4 @@
-package Irctc.automation;
+package Irctc.automation.LoginRegister;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;

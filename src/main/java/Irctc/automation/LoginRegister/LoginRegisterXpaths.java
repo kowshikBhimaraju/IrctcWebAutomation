@@ -1,4 +1,4 @@
-package Irctc.automation;
+package Irctc.automation.LoginRegister;
 
 public class LoginRegisterXpaths {
     public String loginButtonXpath = "//a[text()=' LOGIN ']";//For larger resolution screens
