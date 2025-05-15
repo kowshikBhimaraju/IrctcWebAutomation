@@ -24,7 +24,7 @@ public class BookTicketTest extends DriverInitialization {
     }
 
     @Test
-    public void bookTicket() {
+    public void bookTicket() throws InterruptedException {
         bookTicketMethods.bookTicket();
     }
 }
