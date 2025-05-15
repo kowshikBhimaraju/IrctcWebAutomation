@@ -15,13 +15,14 @@ import org.openqa.selenium.io.FileHandler;
 
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
+import org.openqa.selenium.support.ui.Select;
 
 public class PnrStatus {
 
     public WebDriver driver;
     PnrStatusXpaths pnrStatusXpaths;
     String parentWindowHandleString;
-    WebElement homePagePnrStatusButton, captchaCodeNumeric, rtbsLink, calendarIcon, calendarTable, sourceStation;
+    WebElement homePagePnrStatusButton, captchaCodeNumeric, calendarIcon, calendarTable, sourceStation;
     String pathforScreenShot = "C:\\Users\\2159800\\Uiscreenshots\\captcha.png";
     ArrayList<WebElement> sourceDestinationList;
 
@@ -58,7 +59,6 @@ public class PnrStatus {
                     FileHandler.copy(source, new File(pathforScreenShot));
                     ITesseract image = new Tesseract();
                     String imageOcr = image.doOCR(new File(pathforScreenShot));
-                    imageOcr.substring(0, 4);
                     System.out.println("----------------Image ORC Conversion Done-----------------");
                     System.out.println("captcha VALUE" + imageOcr);
                 } catch (Exception e) {
@@ -67,10 +67,22 @@ public class PnrStatus {
                 break;
             case "Reserved Train Between Stations":
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-                rtbsLink.click();
-//			calendarIcon.click();
-                sourceDestinationList = new ArrayList<WebElement>();
-                sourceStation.sendKeys("HYD");
+                driver.findElement(By.xpath(pnrStatusXpaths.rtbStations)).click();
+                driver.findElement(By.xpath(pnrStatusXpaths.calendarRtbsImg)).click();
+                driver.findElement(By.xpath(pnrStatusXpaths.calenderLeftBlock)).click();
+                String monthName = driver.findElement(By.xpath(pnrStatusXpaths.selectMonthName)).getText().toString();
+                System.out.println("MONTH NAME:::" + monthName);
+                WebElement tableBody = driver.findElement(By.xpath(pnrStatusXpaths.selectDateForFirsTable));
+                List<WebElement> tableRows = tableBody.findElements(By.tagName("tr"));
+                int sizeOfTableRows = tableRows.size();
+                System.out.println("List of Elements for table rows" + sizeOfTableRows);
+                for (WebElement tableRow : tableRows) {
+                    List<WebElement> tableData = tableRow.findElements(By.tagName("td"));
+                    int sizeOfTableData = tableData.size();
+                    System.out.println("List of Elements for table data" + sizeOfTableData);
+                }
+
+
                 break;
             case "Seat Availability":
                 break;

@@ -20,14 +20,16 @@ public class PnrStatuTest extends DriverInitialization {
         pnrStatus = new PnrStatus(driver);
     }
 
-//    @AfterTest
-//    public void setUpClosuer() throws InterruptedException {
-//        Thread.sleep(10000);
-//        driver.close();
-//    }
+    @AfterTest
+    public void setUpClosuer() throws InterruptedException {
+        Thread.sleep(10000);
+        driver.close();
+//        Thread.sleep(5000);
+//        driver.quit();
+    }
 
     @Test
     public void pnrEnquiryTest() throws IOException {
-        pnrStatus.pnrStatusButton("PNR Enquiry");
+        pnrStatus.pnrStatusButton("Reserved Train Between Stations");
     }
 }

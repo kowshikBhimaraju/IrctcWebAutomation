@@ -13,8 +13,8 @@ public class LoginAndRegisterTest extends DriverInitialization {
 
     LoginRegisterMethods loginRegisterMethods;
 
-    public LoginAndRegisterTest() {
-    }
+//    public LoginAndRegisterTest() {
+//    }
 
     @BeforeTest
     public void setUp() throws IOException {
@@ -22,14 +22,14 @@ public class LoginAndRegisterTest extends DriverInitialization {
         loginRegisterMethods = new LoginRegisterMethods(driver);
     }
 
-    @AfterTest
-    public void setUpClosuer() {
-        driver.close();
-    }
+//    @AfterTest
+//    public void setUpClosuer() {
+//        driver.close();
+//    }
 
     @Test
     public void loginButtonHomePage() {
-        loginRegisterMethods.loginFeatureHomePage();
+        loginRegisterMethods.loginFeatureFunctionality();
     }
 
     @Test
