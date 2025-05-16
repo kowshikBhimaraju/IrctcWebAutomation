@@ -7,5 +7,5 @@ public class BookTicketXpaths {
     public String toAutoSuggestiveDropDownInput = "#destination>span>input";
     public String toDropDownSuggestions = ".ui-autocomplete-list-item>span";
     public String jourenyQuotaXpath = "(//p-dropdown/div/div/span)[3]";
-    public String selectJounreyDate = "//p-calendar/span/input";
+    public String calendarInput = "//p-calendar/span/input";
 }

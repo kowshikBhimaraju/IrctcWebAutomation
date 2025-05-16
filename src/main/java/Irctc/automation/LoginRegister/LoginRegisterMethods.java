@@ -10,7 +10,7 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 
-import Irctc.automation.CommonMethods.CommonMethods;
+import Irctc.automation.Utils.Utils;
 import Irctc.automation.Pnrstatus.PnrStatus;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
@@ -51,7 +51,7 @@ public class LoginRegisterMethods {
     public void loginFeatureFunctionality() {
         loginFeatureHomePage();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        CommonMethods.waitFor(2);
+        Utils.waitFor(2);
         try {
             driver.findElement(By.xpath(loginRegisterXpaths.loginUserNameTextXpath)).sendKeys("ammulupr");
             driver.findElement(By.xpath(loginRegisterXpaths.loginPasswordTextXpath)).sendKeys("753888333Aa");
@@ -80,13 +80,13 @@ public class LoginRegisterMethods {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.xpath(loginRegisterXpaths.registerButton)).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        CommonMethods.waitFor(2);
+        Utils.waitFor(2);
         driver.findElement(By.cssSelector(loginRegisterXpaths.userNameRegisterCssSelector)).sendKeys("testingSelenium");
         driver.findElement(By.cssSelector(loginRegisterXpaths.fullNameRegisterCssSelector)).sendKeys("SeleniumTester");
         driver.findElement(By.cssSelector(loginRegisterXpaths.passwordRegisterCssSelector)).sendKeys("Selenium@123");
         driver.findElement(By.cssSelector(loginRegisterXpaths.confirmPasswordRegisterCssSelector)).sendKeys("Selenium@123");
         driver.findElement(By.cssSelector(loginRegisterXpaths.emailRegisterCssSelector)).sendKeys("selenium123@gmail.com");
-        driver.findElement(By.cssSelector(loginRegisterXpaths.mobileNumberRegisterCssSelector)).sendKeys(CommonMethods.randomTenDigit());
+        driver.findElement(By.cssSelector(loginRegisterXpaths.mobileNumberRegisterCssSelector)).sendKeys(Utils.randomTenDigit());
         captchaRegisterButton = driver.findElement(By.xpath(loginRegisterXpaths.captchaRegisterButtonXpath));
         File source = captchaRegisterButton.getScreenshotAs(OutputType.FILE);
         FileHandler.copy(source, new File(pathforScreenShot));
