@@ -5,9 +5,15 @@ import org.openqa.selenium.WebDriver;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeMethod;
+
+import java.time.Duration;
 
 public class CommonMethods {
     WebDriver driver;
+    public WebDriverWait webDriverWait;
+
 
     public CommonMethods(WebDriver driver) {
         this.driver = driver;

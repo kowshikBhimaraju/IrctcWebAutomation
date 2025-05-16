@@ -3,14 +3,18 @@ package Irctc.automation.BookTicket;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Locale;
 
 public class BookTicketMethods {
 
     WebDriver driver;
     BookTicketXpaths bookTicketXpaths;
+    WebElement inputFromElement, inputToElement, jounreyQuota, jounreyDate;
+    WebDriverWait webDriverWait;
 
     public BookTicketMethods(WebDriver driver) {
         System.out.println("Initializing IrctcHomePage driver" + driver);
@@ -20,38 +24,46 @@ public class BookTicketMethods {
 
 
     public void bookTicket() throws InterruptedException {
-//        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//
-//        WebElement fromInput = webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(bookTicketXpaths.fromAutoSuggestiveDropDown)));
-//        fromInput.click();
-//        fromInput.sendKeys("HY");
-//
-//        // Wait for suggestions to appear
-//        List<WebElement> suggestions = webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(bookTicketXpaths.css)));
-//
-//// Iterate and select the first valid station (skip "Stations" label)
-//        for (WebElement suggestion : suggestions) {
-//            String text = suggestion.getText().trim();
-//            if (!text.equalsIgnoreCase("Stations") && !text.isEmpty()) {
-//                suggestion.click();
-//                break;
-//            }
-//        }
-        Thread.sleep(10000);
-        Alert alert = driver.switchTo().alert();
-        alert.dismiss();
-        driver.findElement(By.xpath(bookTicketXpaths.fromAutoSuggestiveDropDown)).sendKeys("DELHI - DLI");
-        Thread.sleep(30000);
-        List<WebElement> fromSearchAutoSuggestionList = driver.findElements(By.cssSelector(bookTicketXpaths.fromAutoSuggestionInputXpath));
+        webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        try {
+            webDriverWait.until(ExpectedConditions.alertIsPresent());
+            Alert alert = driver.switchTo().alert();
+            alert.dismiss();
+        } catch (TimeoutException e) {
+            System.out.println("No alert present.");
+        }
+        inputFromElement = driver.findElement(By.cssSelector((bookTicketXpaths.fromAutoSuggestiveDropDownInput)));
+        inputFromElement.clear();
+        inputFromElement.sendKeys("DELHI - DLI");
+//        Thread.sleep(30000);
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(bookTicketXpaths.fromDropDownSuggestions)));
+        List<WebElement> fromSearchAutoSuggestionList = driver.findElements(By.cssSelector(bookTicketXpaths.fromDropDownSuggestions));
         for (WebElement searchFromStationList : fromSearchAutoSuggestionList) {
-            String fromName = searchFromStationList.getText().toString();
-            if (fromName.trim().contains("  DELHI - DLI  ")) {
-                searchFromStationList.sendKeys(Keys.ARROW_DOWN);
-                searchFromStationList.sendKeys(Keys.ENTER);
+            if (searchFromStationList.getText().trim().contains("DELHI - DLI")) {
+                webDriverWait.until(ExpectedConditions.elementToBeClickable(searchFromStationList)).click();
+                searchFromStationList.click();
                 break;
             }
-
-            System.out.println("LIST OF STATIONS FROM THE GIVEN INPUT" + fromName);
         }
+
+        inputToElement = driver.findElement(By.cssSelector(bookTicketXpaths.toAutoSuggestiveDropDownInput));
+        inputToElement.clear();
+        inputToElement.sendKeys("TIRUPATI");
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(bookTicketXpaths.toDropDownSuggestions)));
+        List<WebElement> toSearchAutoSuggestionList = driver.findElements(By.cssSelector(bookTicketXpaths.toDropDownSuggestions));
+        for (WebElement searchToStationList : toSearchAutoSuggestionList) {
+            if (searchToStationList.getText().trim().contains("TIRUPATI - TPTY")) {
+                webDriverWait.until(ExpectedConditions.elementToBeClickable(searchToStationList)).click();
+                searchToStationList.click();
+                break;
+            }
+        }
+
+        jounreyDate = driver.findElement(By.xpath(bookTicketXpaths.selectJounreyDate));
+        jounreyDate.clear();
+        jounreyDate.sendKeys("25/06/2025");
+//        jounreyQuota = driver.findElement(By.xpath(bookTicketXpaths.jourenyQuotaXpath));
+//        jounreyQuota.click();
+
     }
 }
