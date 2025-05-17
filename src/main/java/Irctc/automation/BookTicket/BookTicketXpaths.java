@@ -7,5 +7,11 @@ public class BookTicketXpaths {
     public String toAutoSuggestiveDropDownInput = "#destination>span>input";
     public String toDropDownSuggestions = ".ui-autocomplete-list-item>span";
     public String jourenyQuotaXpath = "(//p-dropdown/div/div/span)[3]";
-    public String calendarInput = "//p-calendar/span/input";
+    public String calendarInput = "#jDate";
+
+    public String toSelectDateXpath(int targetDay) {
+        String toSelectDateXpath="//table[contains(@class, 'ui-datepicker-calendar')]//td[not(contains(@class,'ui-datepicker-other-month'))]/a[text()="+targetDay+"]";
+        return toSelectDateXpath;
+    }
 }
+

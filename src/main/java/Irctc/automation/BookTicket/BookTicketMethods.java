@@ -1,13 +1,17 @@
 package Irctc.automation.BookTicket;
 
-import Irctc.automation.Utils.Utils;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeMethod;
-
 import java.time.Duration;
 import java.util.List;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Irctc.automation.Utils.Utils;
 
 
 public class BookTicketMethods {
@@ -62,8 +66,8 @@ public class BookTicketMethods {
         }
 
         utils = new Utils(driver);
-        jounreyDate = driver.findElement(By.xpath(bookTicketXpaths.calendarInput));
-        utils.setCalendarDate("29/05/2025", "DD/MM/YYYY");
+        jounreyDate = driver.findElement(By.cssSelector(bookTicketXpaths.calendarInput));
+        utils.setCalendarDate("19/05/2025", "DD/MM/YYYY");
 
 
     }

@@ -1,22 +1,26 @@
 package Irctc.automation.Utils;
 
-import org.openqa.selenium.WebDriver;
-
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Irctc.automation.BookTicket.BookTicketXpaths;
+
 public class Utils {
     WebDriver driver;
+    BookTicketXpaths bookTicketXpaths;
     public WebDriverWait webDriverWait;
     int targetDay, targetMonth, targetYear;
 
 
     public Utils(WebDriver driver) {
         this.driver = driver;
+        bookTicketXpaths = new BookTicketXpaths();
     }
 
     public static void waitFor(int Count) {
@@ -45,8 +49,12 @@ public class Utils {
             formattedTargetDate = targetDateFormat.parse(targetDate);
             calendar.setTime(formattedTargetDate);
             targetDay = calendar.get(Calendar.DAY_OF_MONTH);
+            System.out.println("Target Day: " + targetDay);
             targetMonth = calendar.get(Calendar.MONTH);
             targetYear = calendar.get(Calendar.YEAR);
+
+            driver.findElement(By.cssSelector(bookTicketXpaths.calendarInput)).click();
+            driver.findElement(By.xpath(bookTicketXpaths.toSelectDateXpath(targetDay))).click();
 
         } catch (ParseException e) {
             throw new RuntimeException(e);
