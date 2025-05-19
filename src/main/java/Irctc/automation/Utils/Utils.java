@@ -41,13 +41,17 @@ public class Utils {
     }
 
     public void setCalendarDate(String targetDate, String dateFormat) {
+        System.out.println("Target Date: " + targetDate);   
         Date formattedTargetDate;
         Calendar calendar = Calendar.getInstance();//To get the current time
-        SimpleDateFormat targetDateFormat = new SimpleDateFormat(dateFormat);//To set the format as per the UI calendar
+        System.out.println("Current Date: " + calendar.getTime());
+        SimpleDateFormat targetDateFormat = new SimpleDateFormat(dateFormat);
+        System.out.println("targetDateFormat" +targetDateFormat);;//To set the format as per the UI calendar
         try {
             targetDateFormat.setLenient(true);
             formattedTargetDate = targetDateFormat.parse(targetDate);
             calendar.setTime(formattedTargetDate);
+            System.out.println("Formatted Target Date: " + formattedTargetDate);
             targetDay = calendar.get(Calendar.DAY_OF_MONTH);
             System.out.println("Target Day: " + targetDay);
             targetMonth = calendar.get(Calendar.MONTH);
